@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1,
+    "nom": "Gardienne de l’Aube",
+    "image": "assets/images/01-gardienne-de-laube.png",
+    "description": "Un héros qui protège les royaumes de la Lumière.",
+    "type": "hero",
+    "rarete": "commune",
+    "attaque": 2,
+    "vie": 4
+  },
+  {
+    "id": 2,
+    "nom": "Écuyer solaire",
+    "image": "assets/images/02-ecuyer-solaire.png",
+    "description": "Un héros qui protège les royaumes de la Lumière.",
+    "type": "hero",
+    "rarete": "commune",
+    "attaque": 3,
+    "vie": 5
+  },
+  {
+    "id": 3,
+    "nom": "Chevalier de Lumière",
+    "image": "assets/images/03-chevalier-de-lumiere.png",
+    "description": "Un héros qui protège les royaumes de la Lumière.",
+    "type": "hero",
+    "rarete": "rare",
+    "attaque": 4,
+    "vie": 6
+  },
+  {
+    "id": 4,
+    "nom": "Prêtresse céleste",
+    "image": "assets/images/04-pretresse-celeste.png",
+    "description": "Un héros qui protège les royaumes de la Lumière.",
+    "type": "hero",
+    "rarete": "rare",
+    "attaque": 5,
+    "vie": 7
+  },
+  {
+    "id": 5,
+    "nom": "Ange des cimes",
+    "image": "assets/images/05-ange-des-cimes.png",
+    "description": "Un héros qui protège les royaumes de la Lumière.",
+    "type": "hero",
+    "rarete": "epique",
+    "attaque": 6,
+    "vie": 8
+  },
+  {
+    "id": 6,
+    "nom": "Seraphina",
+    "image": "assets/images/06-seraphina.png",
+    "description": "Un héros qui protège les royaumes de la Lumière.",
+    "type": "hero",
+    "rarete": "legendaire",
+    "attaque": 7,
+    "vie": 9
+  },
+  {
+    "id": 7,
+    "nom": "Ombre affamée",
+    "image": "assets/images/07-ombre-affamee.png",
+    "description": "Une créature des royaumes obscurs.",
+    "type": "monstre",
+    "rarete": "commune",
+    "attaque": 2,
+    "vie": 4
+  },
+  {
+    "id": 8,
+    "nom": "Loup des abysses",
+    "image": "assets/images/08-loup-des-abysses.png",
+    "description": "Une créature des royaumes obscurs.",
+    "type": "monstre",
+    "rarete": "commune",
+    "attaque": 3,
+    "vie": 5
+  },
+  {
+    "id": 9,
+    "nom": "Chasseur nocturne",
+    "image": "assets/images/09-chasseur-nocturne.png",
+    "description": "Une créature des royaumes obscurs.",
+    "type": "monstre",
+    "rarete": "rare",
+    "attaque": 4,
+    "vie": 6
+  },
+  {
+    "id": 10,
+    "nom": "Goule des ruines",
+    "image": "assets/images/10-goule-des-ruines.png",
+    "description": "Une créature des royaumes obscurs.",
+    "type": "monstre",
+    "rarete": "rare",
+    "attaque": 5,
+    "vie": 7
+  },
+  {
+    "id": 11,
+    "nom": "Dragon du crépuscule",
+    "image": "assets/images/11-dragon-du-crepuscule.png",
+    "description": "Une créature des royaumes obscurs.",
+    "type": "monstre",
+    "rarete": "epique",
+    "attaque": 6,
+    "vie": 8
+  },
+  {
+    "id": 12,
+    "nom": "Aegnor",
+    "image": "assets/images/12-aegnor.png",
+    "description": "Une créature des royaumes obscurs.",
+    "type": "monstre",
+    "rarete": "legendaire",
+    "attaque": 7,
+    "vie": 9
+  },
+  {
+    "id": 13,
+    "nom": "Disciple oublié",
+    "image": "assets/images/13-disciple-oublie.png",
+    "description": "Un serviteur fidèle aux forces anciennes.",
+    "type": "minion",
+    "rarete": "commune",
+    "attaque": 2,
+    "vie": 4
+  },
+  {
+    "id": 14,
+    "nom": "Guetteur des tombes",
+    "image": "assets/images/14-guetteur-des-tombes.png",
+    "description": "Un serviteur fidèle aux forces anciennes.",
+    "type": "minion",
+    "rarete": "commune",
+    "attaque": 3,
+    "vie": 5
+  },
+  {
+    "id": 15,
+    "nom": "Veilleur des ruines",
+    "image": "assets/images/15-veilleur-des-ruines.png",
+    "description": "Un serviteur fidèle aux forces anciennes.",
+    "type": "minion",
+    "rarete": "rare",
+    "attaque": 4,
+    "vie": 6
+  },
+  {
+    "id": 16,
+    "nom": "Gardien spectral",
+    "image": "assets/images/16-gardien-spectral.png",
+    "description": "Un serviteur fidèle aux forces anciennes.",
+    "type": "minion",
+    "rarete": "rare",
+    "attaque": 5,
+    "vie": 7
+  },
+  {
+    "id": 17,
+    "nom": "Sentinelle du Néant",
+    "image": "assets/images/17-sentinelle-du-neant.png",
+    "description": "Un serviteur fidèle aux forces anciennes.",
+    "type": "minion",
+    "rarete": "epique",
+    "attaque": 6,
+    "vie": 8
+  },
+  {
+    "id": 18,
+    "nom": "Zalthar",
+    "image": "assets/images/18-zalthar.png",
+    "description": "Un serviteur fidèle aux forces anciennes.",
+    "type": "minion",
+    "rarete": "legendaire",
+    "attaque": 7,
+    "vie": 9
+  },
+  {
+    "id": 19,
+    "nom": "Étincelle interdite",
+    "image": "assets/images/19-etincelle-interdite.png",
+    "description": "Une magie issue des arcanes oubliées.",
+    "type": "sort",
+    "rarete": "commune",
+    "effet": "Inflige 3 dégâts à une cible."
+  },
+  {
+    "id": 20,
+    "nom": "Sceau ancien",
+    "image": "assets/images/20-sceau-ancien.png",
+    "description": "Une magie issue des arcanes oubliées.",
+    "type": "sort",
+    "rarete": "commune",
+    "effet": "Inflige 4 dégâts à une cible."
+  },
+  {
+    "id": 21,
+    "nom": "Éclair obscur",
+    "image": "assets/images/21-eclair-obscur.png",
+    "description": "Une magie issue des arcanes oubliées.",
+    "type": "sort",
+    "rarete": "rare",
+    "effet": "Inflige 5 dégâts à une cible."
+  },
+  {
+    "id": 22,
+    "nom": "Flamme maudite",
+    "image": "assets/images/22-flamme-maudite.png",
+    "description": "Une magie issue des arcanes oubliées.",
+    "type": "sort",
+    "rarete": "rare",
+    "effet": "Inflige 6 dégâts à une cible."
+  },
+  {
+    "id": 23,
+    "nom": "Tempête astrale",
+    "image": "assets/images/23-tempete-astrale.png",
+    "description": "Une magie issue des arcanes oubliées.",
+    "type": "sort",
+    "rarete": "epique",
+    "effet": "Inflige 7 dégâts à une cible."
+  },
+  {
+    "id": 24,
+    "nom": "Invocation suprême",
+    "image": "assets/images/24-invocation-supreme.png",
+    "description": "Une magie issue des arcanes oubliées.",
+    "type": "sort",
+    "rarete": "legendaire",
+    "effet": "Inflige 8 dégâts à une cible."
+  }
+]
