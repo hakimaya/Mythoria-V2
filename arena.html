@@ -1,5 +1,5 @@
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,43 +8,43 @@
         <script type="module" src="./js/main.js"></script>
     </head>
     <body>
-        <header class="flex items-center flex-row justify-between p-6 text-white bg-black">
+        <header class="flex items-center flex-wrap justify-between p-6 text-white bg-black">
 
 
-            <h1 class="text-3xl">MYTHORIA</h1>
-            <p class="font-semibold">Arena de combat</p>
+            <h1 class="text-2xl lg:text-3xl">MYTHORIA</h1>
+            <p class="text-sm font-semibold">Arène de combat</p>
 
         </header>
 
-        <main id="main" class="flex">
-            <div class="w-3/4">
-                    <section>
+        <main id="main" class="flex flex-col lg:flex-row">
+            <div class="w-full lg:w-3/4 min-w-0">
+                <section>
                     <div class="p-6 bg-gray-300 font-semibold">
                         <h2>Adversaire — Ténèbres</h2>
                         <p>HP : 3000</p>
-                        <div class="mt-4 grid grid-cols-10 gap-2 p-4">
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                        </div>
-                        <p>Terrain adverse . 10place</p>
+                        <div class="mt-4 grid grid-cols-5 lg:grid-cols-10 gap-2">
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                        <div class="h-32 border border-gray-500"></div>
+                </div>
+                        <p class="mt-3 text-sm">Terrain adverse · 10 places</p>
                     </div>
                 </section>
-                <section class="flex justify-center text-white bg-black p-4">
-                    <div>Tour 1 - Votre tour</div>
-                </section>
-                <section>
+                <div class="text-center text-white bg-black p-4">
+                Tour 1 — Votre tour
+                </div>
+                <section class="p-4 lg:p-6 bg-gray-300">
                     <div class="p-6 bg-gray-300 font-semibold">
                         <h2>Vous — Lumière</h2>
                         <p>HP : 3000</p>
-                        <div class="mt-4 grid grid-cols-10 gap-2 p-4">
+                        <div class="mt-4 grid grid-cols-5 lg:grid-cols-10 gap-2">
                             <div class="h-32 border border-gray-500"></div>
                             <div class="h-32 border border-gray-500"></div>
                             <div class="h-32 border border-gray-500"></div>
@@ -56,36 +56,31 @@
                             <div class="h-32 border border-gray-500"></div>
                             <div class="h-32 border border-gray-500"></div>
                         </div>
-                        <p>Votre Terrain . 10place</p>
+                        <p class="mt-3 text-sm">Votre terrain · 10 places</p>
                     </div>
                 </section>
-                <section>
-                    <div class="bg-black font-semibold p-6 text-white ">
-                        <p>
+                <section class="bg-black p-4 lg:p-6 text-white">
+                        <h2 class="font-semibold">
                             Votre main 5/5
-                        </p>
+                        </h2>
                         <div id="player-hand" class="grid grid-cols-5 gap-2 p-4">
-                            <!--
                             <div class="h-40 border border-gray-500 text-center">Carte 1</div>
                             <div class="h-40 border border-gray-500 text-center">Carte 2</div>
                             <div class="h-40 border border-gray-500 text-center">Carte 3</div>
                             <div class="h-40 border border-gray-500 text-center">Carte 4</div>
                             <div class="h-40 border border-gray-500 text-center">Carte 5</div>
-                            -->
                         </div>
-                    </div>
                 </section>
             </div>
             
-            <section>
-                <aside class="p-6">
-                    <p class="text-center font-semibold p-6">Deck</p>
+            
+                <aside class="w-full lg:w-1/4 p-6 bg-gray-200">
+                    <h2 class="text-center font-semibold p-6">Deck</h2>
                     <div class="mx-auto h-40 w-40 border border-gray-500 "></div>
                     <p
                     class="text-center mt-4">15 cartes restantes</p>
                     <button class="w-full bg-yellow-600 text-white font-semibold py-3 mt-4 border-gray-500"  type="button">Fin du tour</button>
                 </aside>
-            </section>
         </main>
     </body>
     </html>

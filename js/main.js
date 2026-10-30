@@ -1,3 +1,3 @@
 import {carte} from "./state.js";
-import "./ui.js";
-console.log(carte.nom);
+import {affichercarte}from "./ui.js";
+affichercarte(carte);
