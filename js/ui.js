@@ -15,7 +15,7 @@ export function affichercarte(carte){
     bouton.append(spanatk);
 
     const spanhp = document.createElement("span");
-    spanhp.textContent = " · HP :" + carte.hp;
+    spanhp.textContent = " · HP :" + carte.vie;
     bouton.append(spanhp);
     mainplayer.append(bouton);
 }

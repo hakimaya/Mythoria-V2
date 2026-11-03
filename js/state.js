@@ -1,8 +1,12 @@
-export const carte={
-    id:1,
-    nom:"garde de l'aube",
-    image:"assets/images/01-gardienne-de-laube.png",
-    camp: "lumiere",
-    attaque:500,
-    hp : 600,
+export const deckid = JSON.parse(localStorage.getItem("deckMythoria"));
+export const gameState = 
+    {player : 
+    {
+        hp : 3000,camp : null,deck:[],hand:[],battlefield:[]
+    } , opponent : {
+        hp : 3000,camp : null,deck:[],hand:[],battlefield:[]
+    } ,
+    currentTurn : null,
+    turnNumber : 1,
+    gameOver : false,
 };
