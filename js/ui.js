@@ -1,4 +1,6 @@
+import { gameState } from "./state";
 const mainplayer = document.querySelector("#player-hand");
+
 
 
 
@@ -18,5 +20,10 @@ export function affichercarte(carte){
     spanhp.textContent = " · HP :" + carte.vie;
     bouton.append(spanhp);
     mainplayer.append(bouton);
+}
+export function carterestante()
+{
+    const len = document.getElementById("len");
+    len.textContent = gameState.player.deck.length + " cartes restantes.";
 }
 

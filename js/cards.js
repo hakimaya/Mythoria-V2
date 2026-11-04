@@ -1,4 +1,4 @@
-import { affichercarte } from "./ui.js";
+import { affichercarte , carterestante} from "./ui.js";
 import {deckid,gameState} from "./state.js";
 import { shuffleDeck } from "./utils.js";
 
@@ -31,9 +31,11 @@ fetch("./data/cards.json")
         {
             affichercarte(gameState.player.hand[i]);
         }
+        carterestante();
     })
     .catch(function(erreur)
     {
         console.error(erreur);
     })
 ;
+
