@@ -1,5 +1,6 @@
 import { affichercarte } from "./ui.js";
-import { carte, deckid} from "./state.js";
+import {deckid,gameState} from "./state.js";
+import { shuffleDeck } from "./utils.js";
 
 fetch("./data/cards.json")
     .then(function(response)
@@ -17,7 +18,7 @@ fetch("./data/cards.json")
                 return carte.id === id;
             })
         })
-        console.log(deck);
+        gameState.player.deck = shuffleDeck(deck);
     })
     .catch(function(erreur)
     {
