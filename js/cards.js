@@ -19,6 +19,18 @@ fetch("./data/cards.json")
             })
         })
         gameState.player.deck = shuffleDeck(deck);
+        for(let i = 0;i<5;i++)
+        {
+            if(gameState.player.deck.length > 0 && gameState.player.hand.length < 5)
+            {
+                let drawn = gameState.player.deck.pop();
+                gameState.player.hand.push(drawn);
+            }
+        }
+        for(let i = 0 ; i < gameState.player.hand.length ; i++)
+        {
+            affichercarte(gameState.player.hand[i]);
+        }
     })
     .catch(function(erreur)
     {
