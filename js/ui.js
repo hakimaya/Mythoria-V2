@@ -27,3 +27,15 @@ export function carterestante()
     len.textContent = gameState.player.deck.length + " cartes restantes.";
 }
 
+export function checkturn()
+{
+    let camp = document.getElementById("camp-choice");
+    if(gameState.currentTurn === "player")
+    {
+        camp.classList.remove("hidden");
+    }
+    else if (gameState.currentTurn === "opponent")
+    {
+        camp.classList.add("hidden");
+    }
+}

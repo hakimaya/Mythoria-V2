@@ -15,8 +15,30 @@
             <p class="text-sm font-semibold">Arène de combat</p>
 
         </header>
+        <section id="camp-choice" class="hidden bg-black text-white p-6 text-center">
+            <h2 class="text-xl font-semibold">Choisissez votre camp</h2>
+            <p class="text-sm text-gray-400 mt-2">
+                Vous commencez : choisissez la Lumière ou les Ténèbres.
+            </p>
 
+            <div class="flex flex-col sm:flex-row justify-center mt-4">
+                <button
+                    id="choose-light"
+                    type="button"
+                    class="bg-yellow-600 text-white font-semibold px-6 py-3 m-2 rounded">
+                    Lumière
+                </button>
+
+                <button
+                    id="choose-dark"
+                    type="button"
+                    class="bg-gray-800 text-white font-semibold px-6 py-3 m-2 rounded">
+                    Ténèbres
+                </button>
+            </div>
+        </section>
         <main id="main" class="flex flex-col lg:flex-row">
+            
             <div class="w-full lg:w-3/4 min-w-0">
                 <section>
                     <div class="p-6 bg-gray-300 font-semibold">

@@ -1,4 +1,4 @@
-import { affichercarte , carterestante} from "./ui.js";
+import { affichercarte , carterestante,checkturn} from "./ui.js";
 import {deckid,gameState} from "./state.js";
 import { shuffleDeck } from "./utils.js";
 
