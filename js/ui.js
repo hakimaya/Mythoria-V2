@@ -39,3 +39,12 @@ export function checkturn()
         camp.classList.add("hidden");
     }
 }
+export function afficherCamps()
+{
+    const titreop = document.getElementById("Adversaire");
+    const titrepl = document.getElementById("player");
+    
+    titrepl.textContent = "Vous — lumiere";
+    titreop.textContent = "Adversaire - tenebres";
+    
+}
