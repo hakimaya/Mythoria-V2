@@ -28,3 +28,11 @@ export function choisirCampAdversaire()
             
     }
 }
+
+export function findutour()
+{
+    if(gameState.player.camp !== null && gameState.opponent.camp !== null && gameState.currentTurn === "player" && gameState.gameOver == false)
+    {
+        gameState.currentTurn = "opponent";
+    }
+}

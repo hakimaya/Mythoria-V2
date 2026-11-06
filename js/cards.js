@@ -32,6 +32,14 @@ fetch("./data/cards.json")
             affichercarte(gameState.player.hand[i]);
         }
         carterestante();
+        let creatures = [];
+        for(let i = 0; i < cartes.length;i++)
+        {
+            if(cartes[i].type !== "sort")
+            {
+                creatures.push(cartes[i]);
+            }
+        }
     })
     .catch(function(erreur)
     {

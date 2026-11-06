@@ -1,6 +1,6 @@
 import {afficherCamps, affichercarte, checkturn}from "./ui.js";
 import "./cards.js";
-import { turn, choisirCampAdversaire } from "./turns.js";
+import { turn, choisirCampAdversaire,findutour } from "./turns.js";
 import { gameState } from "./state.js";
 turn();
 checkturn();
@@ -31,3 +31,5 @@ choisirCampAdversaire();
 if(gameState.currentTurn === "opponent"){
     afficherCamps();
 }
+const endturnbutton = document.getElementById("finturn");
+endturnbutton.addEventListener("click",findutour);
