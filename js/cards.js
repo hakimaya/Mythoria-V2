@@ -1,11 +1,12 @@
 import {
     affichermain,
     carterestante,
+    afficherEtatCombat,
     afficherterrainadversaire
 } from "./ui.js";
 import { deckid, gameState } from "./state.js";
 import { shuffleDeck } from "./utils.js";
-import { jouertouradvesaire } from "./opponent.js";
+import { lancerTourAdversaire } from "./turns.js";
 
 fetch("./data/cards.json")
     .then(function (response)
@@ -72,9 +73,11 @@ fetch("./data/cards.json")
 
         if (gameState.currentTurn === "opponent")
         {
-            jouertouradvesaire();
-            gameState.currentTurn = "player";
-            afficherterrainadversaire();
+            lancerTourAdversaire();
+        }
+        else
+        {
+            afficherEtatCombat();
         }
     })
     .catch(function (erreur)

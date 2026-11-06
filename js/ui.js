@@ -81,10 +81,13 @@ export function afficherterrain()
             img.src = carte.image;
             img.alt = carte.nom;
             slots[i].append(img);
+            const stats = document.createElement("span");
+            stats.textContent = "ATK : " + carte.attaqueEffective + " · HP : " + carte.currentHp;
+            slots[i].append(stats);
 
             img.addEventListener("click", function ()
             {
-                if (gameState.currentTurn !== "player" || gameState.gameOver)
+                if (gameState.currentTurn !== "player" || gameState.gameOver || carte.hasAttacked)
                 {
                     return;
                 }
@@ -94,9 +97,8 @@ export function afficherterrain()
                 if (gameState.opponent.battlefield.length === 0)
                 {
                     attaquer(carte);
-                    document.getElementById("opponent-hp").textContent =
-                        "HP : " + gameState.opponent.hp;
                     attaquantSelectionne = null;
+                    afficherEtatCombat();
                 }
             });
         }
@@ -112,6 +114,9 @@ export function afficherterrainadversaire()
     {
         slots[i].textContent = "";
         const cible = gameState.opponent.battlefield[i];
+        const stats = document.createElement("span");
+        stats.textContent = "ATK : " + cible.attaqueEffective + " · HP : " + cible.currentHp;
+        slots[i].append(stats);
 
         if (cible)
         {
@@ -130,7 +135,47 @@ export function afficherterrainadversaire()
                 attaquer(attaquantSelectionne, cible);
                 attaquantSelectionne = null;
                 afficherterrainadversaire();
+                afficherEtatCombat();
             });
         }
+    }
+}
+
+export function reinitialiserSelection()
+{
+    attaquantSelectionne = null;
+}
+
+export function afficherEtatCombat()
+{
+    document.getElementById("player-hp").textContent =
+        "HP : " + gameState.player.hp;
+
+    document.getElementById("opponent-hp").textContent =
+        "HP : " + gameState.opponent.hp;
+
+    const statut = document.getElementById("turn-status");
+    const bouton = document.getElementById("fintour");
+
+    bouton.disabled = gameState.gameOver ||
+        gameState.currentTurn !== "player" ||
+        gameState.player.camp === null ||
+        gameState.opponent.camp === null;
+
+    if (gameState.gameOver)
+    {
+        statut.textContent = gameState.player.hp <= 0 ? "Défaite" : "Victoire";
+    }
+    else if (gameState.player.camp === null || gameState.opponent.camp === null)
+    {
+        statut.textContent = "En attente du choix du camp";
+    }
+    else if (gameState.currentTurn === "opponent")
+    {
+        statut.textContent = "Tour " + gameState.turnNumber + " — Adversaire";
+    }
+    else
+    {
+        statut.textContent = "Tour " + gameState.turnNumber + " — Votre tour";
     }
 }

@@ -1,6 +1,13 @@
 import { gameState } from "./state.js";
-import { jouertouradvesaire} from "./opponent.js";
-import { afficherterrainadversaire} from "./ui.js";
+import { jouertouradvesaire } from "./opponent.js";
+import {
+    affichermain,
+    afficherterrain,
+    afficherterrainadversaire,
+    carterestante,
+    afficherEtatCombat,
+    reinitialiserSelection
+} from "./ui.js";
 export function turn()
 {
     let number = Math.random();
@@ -30,13 +37,56 @@ export function choisirCampAdversaire()
     }
 }
 
+function preparerTour(joueur)
+{
+    for (let i = 0; i < joueur.battlefield.length; i++)
+    {
+        joueur.battlefield[i].hasAttacked = false;
+    }
+
+    if (joueur.hand.length < 5 && joueur.deck.length > 0)
+    {
+        joueur.hand.push(joueur.deck.pop());
+    }
+}
+
+export function lancerTourAdversaire()
+{
+    if (gameState.currentTurn !== "opponent" || gameState.gameOver)
+    {
+        return;
+    }
+
+    reinitialiserSelection();
+    preparerTour(gameState.opponent);
+    jouertouradvesaire();
+
+    if (!gameState.gameOver)
+    {
+        gameState.currentTurn = "player";
+        gameState.turnNumber++;
+        preparerTour(gameState.player);
+    }
+
+    affichermain();
+    afficherterrain();
+    afficherterrainadversaire();
+    carterestante();
+    afficherEtatCombat();
+}
+
 export function findutour()
 {
-    if(gameState.player.camp !== null && gameState.opponent.camp !== null && gameState.currentTurn === "player" && gameState.gameOver == false)
+    if (
+        gameState.currentTurn !== "player" ||
+        gameState.gameOver ||
+        gameState.player.camp === null ||
+        gameState.opponent.camp === null
+    )
     {
-        gameState.currentTurn = "opponent";
-        jouertouradvesaire();
-        gameState.currentTurn = "player";
-        afficherterrainadversaire();
+        return;
     }
+
+    gameState.currentTurn = "opponent";
+    lancerTourAdversaire();
 }

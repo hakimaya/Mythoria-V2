@@ -1,85 +1,99 @@
 import { gameState } from "./state.js";
 
-export function invoauercarte(carte){
-    if(gameState.player.camp === null || gameState.opponent.camp === null)
+const campsParType = {
+    hero: "lumiere",
+    monstre: "tenebres",
+    minion: "tenebres"
+};
+
+export function invoauercarte(carte, cote = "player")
+{
+    if (gameState.gameOver || gameState.currentTurn !== cote)
     {
-        return;
+        return false;
     }
-    if(gameState.currentTurn != "player")
+
+    if (gameState.player.camp === null || gameState.opponent.camp === null)
     {
-        return;
+        return false;
     }
-    if(gameState.gameOver === true)
+
+    const joueur = gameState[cote];
+    const index = joueur.hand.indexOf(carte);
+
+    if (index === -1 || carte.type === "sort" || joueur.battlefield.length >= 10)
     {
-        return;
+        return false;
     }
-    if(carte.type === "sort")
+
+    const campCarte = carte.camp || campsParType[carte.type];
+    let coefficient = 1;
+
+    if (campCarte && campCarte !== joueur.camp)
     {
-        return;
+        coefficient = 0.8;
     }
-    if(gameState.player.battlefield.length < 10)
-    {
-        let index = -1;
-        for(let i = 0;i < gameState.player.hand.length ; i++)
-        {
-            if(gameState.player.hand[i] === carte)
-            {
-                index = i;
-                break;
-            }
-            
-        }
-        if(index === -1)
-        {
-            return;
-        }
-        let cartefromhand = gameState.player.hand.splice(index,1);
-        gameState.player.battlefield.push(cartefromhand[0]);
-    }
+
+    const carteCombat = {
+        ...carte,
+        attaqueEffective: Math.round(carte.attaque * coefficient * 10) / 10,
+        currentHp: Math.round(carte.vie * coefficient * 10) / 10,
+        hasAttacked: false
+    };
+
+    joueur.hand.splice(index, 1);
+    joueur.battlefield.push(carteCombat);
+    return true;
 }
 
-export function attaquer(attaquant, cible = null)
+export function attaquer(attaquant, cible = null, cote = "player")
 {
-    if (gameState.currentTurn !== "player" || gameState.gameOver === true)
+    if (gameState.gameOver || gameState.currentTurn !== cote)
     {
-        return;
+        return false;
     }
 
-    if (!gameState.player.battlefield.includes(attaquant))
+    const joueur = gameState[cote];
+    const adversaire = cote === "player" ? gameState.opponent : gameState.player;
+
+    if (!joueur.battlefield.includes(attaquant) || attaquant.hasAttacked)
     {
-        return;
+        return false;
     }
 
-    const adversaire = gameState.opponent;
+    const degats = attaquant.attaqueEffective;
 
     if (cible === null)
     {
-        if (adversaire.battlefield.length === 0)
+        if (adversaire.battlefield.length > 0)
         {
-            adversaire.hp = adversaire.hp - attaquant.attaque;
-
-            if (adversaire.hp <= 0)
-            {
-                adversaire.hp = 0;
-                gameState.gameOver = true;
-            }
+            return false;
         }
 
-        return;
-    }
+        adversaire.hp = Math.max(0, Math.round((adversaire.hp - degats) * 10) / 10);
 
-    for (let i = 0; i < adversaire.battlefield.length; i++)
+        if (adversaire.hp === 0)
+        {
+            gameState.gameOver = true;
+        }
+    }
+    else
     {
-        if (adversaire.battlefield[i] === cible)
+        const index = adversaire.battlefield.indexOf(cible);
+
+        if (index === -1)
         {
-            cible.vie = cible.vie - attaquant.attaque;
+            return false;
+        }
 
-            if (cible.vie <= 0)
-            {
-                adversaire.battlefield.splice(i, 1);
-            }
+        cible.currentHp = Math.round((cible.currentHp - degats) * 10) / 10;
 
-            break;
+        if (cible.currentHp <= 0)
+        {
+            adversaire.battlefield.splice(index, 1);
         }
     }
+
+    attaquant.hasAttacked = true;
+    return true;
 }
