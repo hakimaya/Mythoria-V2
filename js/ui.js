@@ -71,7 +71,7 @@ export function afficherterrain()
     for(let i = 0;i < slots.length;i++)
     {
         slots[i].textContent="";
-        if(gameState.player.gameState.battlefield[i])
+        if (gameState.player.battlefield[i])
         {
             slots[i].textContent = gameState.player.battlefield[i].nom;
         }
