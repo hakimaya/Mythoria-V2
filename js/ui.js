@@ -72,8 +72,11 @@ export function afficherterrain()
     {
         slots[i].textContent="";
         if (gameState.player.battlefield[i])
-        {
-            slots[i].textContent = gameState.player.battlefield[i].nom;
+        {   
+            const img = document.createElement("img");
+            img.setAttribute("src",gameState.player.battlefield[i].image);
+             img.setAttribute("alt",gameState.player.battlefield[i].nom);
+            slots[i].append(img);
         }
     }
 }
