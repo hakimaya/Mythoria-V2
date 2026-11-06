@@ -1,34 +1,45 @@
-import { invoauercarte,attaquer } from "./combat.js";
+import { invoauercarte, attaquer } from "./combat.js";
 import { gameState } from "./state.js";
+
 let attaquantSelectionne = null;
-const mainplayer = document.querySelector("#player-hand");
+const mainplayer = document.getElementById("player-hand");
 
-
-
-
-export function affichercarte(carte){
+export function affichercarte(carte)
+{
     const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "min-w-0 rounded-lg bg-gray-800 p-2 text-center hover:bg-purple-900";
     bouton.textContent = carte.nom;
+
     const image = document.createElement("img");
     image.src = carte.image;
-    image.alt = carte.nom;
+    image.alt = "";
+    image.className = "mx-auto my-2 h-24 w-full object-contain sm:h-32";
     bouton.append(image);
 
-    const spanatk = document.createElement("span");
-    spanatk.textContent = "ATK : " + carte.attaque;
-    bouton.append(spanatk);
+    const stats = document.createElement("span");
+    stats.className = "block text-xs text-yellow-200";
 
-    const spanhp = document.createElement("span");
-    spanhp.textContent = " · HP :" + carte.vie;
-    bouton.append(spanhp);
+    if (carte.type === "sort")
+    {
+        stats.textContent = "Sort";
+    }
+    else
+    {
+        stats.textContent = "ATK : " + carte.attaque + " · HP : " + carte.vie;
+    }
+
+    bouton.append(stats);
     mainplayer.append(bouton);
 
-    bouton.addEventListener("click", function(){
+    bouton.addEventListener("click", function ()
+    {
         invoauercarte(carte);
         affichermain();
         afficherterrain();
-    })
+    });
 }
+
 export function carterestante()
 {
     const len = document.getElementById("len");
@@ -37,107 +48,126 @@ export function carterestante()
 
 export function checkturn()
 {
-    let camp = document.getElementById("camp-choice");
-    if(gameState.currentTurn === "player")
+    const camp = document.getElementById("camp-choice");
+
+    if (gameState.currentTurn === "player" && gameState.player.camp === null)
     {
         camp.classList.remove("hidden");
     }
-    else if (gameState.currentTurn === "opponent")
+    else
     {
         camp.classList.add("hidden");
     }
 }
+
 export function afficherCamps()
 {
     const titreop = document.getElementById("Adversaire");
     const titrepl = document.getElementById("player");
-    
+
     titrepl.textContent = "Vous — " + gameState.player.camp;
-    titreop.textContent = "Adversaire - " + gameState.opponent.camp;
-    
+    titreop.textContent = "Adversaire — " + gameState.opponent.camp;
 }
+
 export function affichermain()
 {
     mainplayer.textContent = "";
-    for(let i = 0;i<gameState.player.hand.length;i++)
+
+    for (let i = 0; i < gameState.player.hand.length; i++)
     {
         affichercarte(gameState.player.hand[i]);
     }
 }
 
+function afficherCarteTerrain(slot, carte)
+{
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "block w-full rounded text-center hover:bg-purple-800";
+
+    const img = document.createElement("img");
+    img.src = carte.image;
+    img.alt = carte.nom;
+    img.className = "mx-auto h-10 w-full object-contain sm:h-14";
+    bouton.append(img);
+
+    const attaque = document.createElement("span");
+    attaque.className = "block text-xs leading-tight";
+    attaque.textContent = "ATK " + carte.attaqueEffective;
+    bouton.append(attaque);
+
+    const vie = document.createElement("span");
+    vie.className = "block text-xs leading-tight";
+    vie.textContent = "HP " + carte.currentHp;
+    bouton.append(vie);
+
+    slot.append(bouton);
+    return bouton;
+}
+
 export function afficherterrain()
 {
-    const battlefield = document.getElementById("player-battlefield");
-    const slots = battlefield.children;
+    const slots = document.getElementById("player-battlefield").children;
 
     for (let i = 0; i < slots.length; i++)
     {
         slots[i].textContent = "";
         const carte = gameState.player.battlefield[i];
 
-        if (carte)
+        if (!carte)
         {
-            const img = document.createElement("img");
-            img.src = carte.image;
-            img.alt = carte.nom;
-            slots[i].append(img);
-            const stats = document.createElement("span");
-            stats.textContent = "ATK : " + carte.attaqueEffective + " · HP : " + carte.currentHp;
-            slots[i].append(stats);
-
-            img.addEventListener("click", function ()
-            {
-                if (gameState.currentTurn !== "player" || gameState.gameOver || carte.hasAttacked)
-                {
-                    return;
-                }
-
-                attaquantSelectionne = carte;
-
-                if (gameState.opponent.battlefield.length === 0)
-                {
-                    attaquer(carte);
-                    attaquantSelectionne = null;
-                    afficherEtatCombat();
-                }
-            });
+            continue;
         }
+
+        const bouton = afficherCarteTerrain(slots[i], carte);
+
+        bouton.addEventListener("click", function ()
+        {
+            if (gameState.currentTurn !== "player" || gameState.gameOver || carte.hasAttacked)
+            {
+                return;
+            }
+
+            attaquantSelectionne = carte;
+
+            if (gameState.opponent.battlefield.length === 0)
+            {
+                attaquer(carte);
+                reinitialiserSelection();
+                afficherEtatCombat();
+            }
+        });
     }
 }
 
 export function afficherterrainadversaire()
 {
-    const battlefield = document.getElementById("opponent-battlefield");
-    const slots = battlefield.children;
+    const slots = document.getElementById("opponent-battlefield").children;
 
     for (let i = 0; i < slots.length; i++)
     {
         slots[i].textContent = "";
         const cible = gameState.opponent.battlefield[i];
-        const stats = document.createElement("span");
-        stats.textContent = "ATK : " + cible.attaqueEffective + " · HP : " + cible.currentHp;
-        slots[i].append(stats);
 
-        if (cible)
+        if (!cible)
         {
-            const img = document.createElement("img");
-            img.src = cible.image;
-            img.alt = cible.nom;
-            slots[i].append(img);
-
-            img.addEventListener("click", function ()
-            {
-                if (attaquantSelectionne === null)
-                {
-                    return;
-                }
-
-                attaquer(attaquantSelectionne, cible);
-                attaquantSelectionne = null;
-                afficherterrainadversaire();
-                afficherEtatCombat();
-            });
+            continue;
         }
+
+        const bouton = afficherCarteTerrain(slots[i], cible);
+
+        bouton.addEventListener("click", function ()
+        {
+            if (attaquantSelectionne === null)
+            {
+                return;
+            }
+
+            attaquer(attaquantSelectionne, cible);
+            reinitialiserSelection();
+            afficherterrainadversaire();
+            afficherEtatCombat();
+        });
     }
 }
 
@@ -156,17 +186,18 @@ export function afficherEtatCombat()
 
     const statut = document.getElementById("turn-status");
     const bouton = document.getElementById("fintour");
+    const campsManquants = gameState.player.camp === null ||
+        gameState.opponent.camp === null;
 
     bouton.disabled = gameState.gameOver ||
         gameState.currentTurn !== "player" ||
-        gameState.player.camp === null ||
-        gameState.opponent.camp === null;
+        campsManquants;
 
     if (gameState.gameOver)
     {
         statut.textContent = gameState.player.hp <= 0 ? "Défaite" : "Victoire";
     }
-    else if (gameState.player.camp === null || gameState.opponent.camp === null)
+    else if (campsManquants)
     {
         statut.textContent = "En attente du choix du camp";
     }

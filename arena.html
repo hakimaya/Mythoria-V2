@@ -1,103 +1,116 @@
-    <!DOCTYPE html>
-    <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet">
-        <title>Arena | MYTHORIA</title>
-        <script type="module" src="./js/main.js"></script>
-    </head>
-    <body>
-        <header class="flex items-center flex-wrap justify-between p-6 text-white bg-black">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arène | Mythoria</title>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css">
+    <script type="module" src="./js/main.js"></script>
+</head>
 
+<body class="min-h-screen bg-gray-900 text-gray-100">
+    <header class="border-b border-purple-800 bg-black">
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between px-4 py-5 sm:px-6">
+            <h1 class="font-serif text-2xl font-bold tracking-widest text-yellow-300">
+                MYTHORIA
+            </h1>
+            <p class="text-sm text-gray-300">Arène de combat</p>
+        </div>
+    </header>
 
-            <h1 class="text-2xl lg:text-3xl">MYTHORIA</h1>
-            <p class="text-sm font-semibold">Arène de combat</p>
+    <section id="camp-choice" class="hidden border-b border-purple-800 bg-purple-900 px-4 py-6 text-center">
+        <h2 class="font-serif text-2xl text-yellow-200">Choisissez votre camp</h2>
+        <p class="mt-2 text-sm text-purple-100">Vous commencez la partie.</p>
 
-        </header>
-        <section id="camp-choice" class="hidden bg-black text-white p-6 text-center">
-            <h2 class="text-xl font-semibold">Choisissez votre camp</h2>
-            <p class="text-sm text-gray-400 mt-2">
-                Vous commencez : choisissez la Lumière ou les Ténèbres.
+        <div class="mx-auto mt-4 grid max-w-sm grid-cols-2 gap-3">
+            <button id="choose-light" type="button"
+                class="rounded-lg bg-yellow-300 px-3 py-3 font-semibold text-gray-900 hover:bg-yellow-200">
+                Lumière
+            </button>
+            <button id="choose-dark" type="button"
+                class="rounded-lg border border-purple-400 bg-gray-900 px-3 py-3 font-semibold hover:bg-purple-800">
+                Ténèbres
+            </button>
+        </div>
+    </section>
+
+    <main id="main" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:flex lg:items-start">
+        <div class="min-w-0 space-y-4 lg:mr-5 lg:flex-1">
+
+            <section class="rounded-xl border border-purple-800 bg-purple-900 p-3 sm:p-5">
+                <div class="flex flex-wrap items-center justify-between">
+                    <h2 id="Adversaire" class="font-serif text-lg font-semibold text-purple-100">
+                        Adversaire
+                    </h2>
+                    <p id="opponent-hp" class="rounded-full bg-gray-900 px-3 py-1 text-sm text-purple-100">
+                        HP : 3000
+                    </p>
+                </div>
+
+                <div id="opponent-battlefield" class="mt-4 grid grid-cols-5 gap-2 lg:grid-cols-10">
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-purple-600 bg-gray-900 sm:h-24"></div>
+                </div>
+            </section>
+
+            <p id="turn-status" role="status"
+                class="rounded-lg border border-gray-700 bg-black px-3 py-2 text-center text-sm font-semibold text-yellow-200">
+                Tour 1
             </p>
 
-            <div class="flex flex-col sm:flex-row justify-center mt-4">
-                <button
-                    id="choose-light"
-                    type="button"
-                    class="bg-yellow-600 text-white font-semibold px-6 py-3 m-2 rounded">
-                    Lumière
-                </button>
+            <section class="rounded-xl border border-yellow-700 bg-gray-800 p-3 sm:p-5">
+                <div class="flex flex-wrap items-center justify-between">
+                    <h2 id="player" class="font-serif text-lg font-semibold text-yellow-200">
+                        Vous
+                    </h2>
+                    <p id="player-hp" class="rounded-full bg-gray-900 px-3 py-1 text-sm text-yellow-200">
+                        HP : 3000
+                    </p>
+                </div>
 
-                <button
-                    id="choose-dark"
-                    type="button"
-                    class="bg-gray-800 text-white font-semibold px-6 py-3 m-2 rounded">
-                    Ténèbres
-                </button>
-            </div>
-        </section>
-        <main id="main" class="flex flex-col lg:flex-row">
-            
-            <div class="w-full lg:w-3/4 min-w-0">
-                <section>
-                    <div class="p-6 bg-gray-300 font-semibold">
-                        <h2 id="Adversaire">Adversaire — Ténèbres</h2>
-                        <p id="opponent-hp">HP : 3000</p>
-                        <div class="mt-4 grid grid-cols-5 lg:grid-cols-10 gap-2" id="opponent-battlefield">
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
-                        <div class="h-32 border border-gray-500"></div>
+                <div id="player-battlefield" class="mt-4 grid grid-cols-5 gap-2 lg:grid-cols-10">
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
+                    <div class="h-20 overflow-hidden rounded border border-yellow-700 bg-gray-900 sm:h-24"></div>
                 </div>
-                        <p class="mt-3 text-sm">Terrain adverse · 10 places</p>
-                    </div>
-                </section>
-                <div class="text-center text-white bg-black p-4" id="turn-status">
-                Tour 1 — Votre tour
+            </section>
+
+            <section class="rounded-xl border border-gray-700 bg-black p-3 sm:p-5">
+                <h2 class="font-serif text-lg font-semibold text-yellow-200">Votre main</h2>
+                <div id="player-hand" class="mt-3 grid grid-cols-2 gap-3 text-sm sm:grid-cols-5"></div>
+            </section>
+        </div>
+
+        <aside class="mt-4 rounded-xl border border-purple-800 bg-gray-800 p-4 lg:mt-0 lg:w-48 lg:flex-shrink-0">
+            <div class="flex items-center justify-center lg:block lg:text-center">
+                <img src="./assets/images/face-down.png" alt=""
+                    class="mr-4 w-12 rounded lg:mx-auto lg:mb-3 lg:w-24">
+                <div>
+                    <h2 class="font-serif text-lg font-semibold text-yellow-200">Deck</h2>
+                    <p id="len" class="mt-1 text-sm text-gray-300">Chargement…</p>
                 </div>
-                <section class="p-4 lg:p-6 bg-gray-300">
-                    <div class="p-6 bg-gray-300 font-semibold">
-                        <h2 id="player">Vous — Lumière</h2>
-                        <p id="player-hp" >HP : 3000</p>
-                        <div class="mt-4 grid grid-cols-5 lg:grid-cols-10 gap-2" id="player-battlefield">
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                            <div class="h-32 border border-gray-500"></div>
-                        </div>
-                        <p class="mt-3 text-sm">Votre terrain · 10 places</p>
-                    </div>
-                </section>
-                <section class="bg-black p-4 lg:p-6 text-white">
-                        <h2 class="font-semibold">
-                            Votre main 5/5
-                        </h2>
-                        <div id="player-hand" class="grid grid-cols-5 gap-2 p-4">
-                        </div>
-                </section>
             </div>
-            
-            
-                <aside class="w-full lg:w-1/4 p-6 bg-gray-200">
-                    <h2 class="text-center font-semibold p-6">Deck</h2>
-                    <div class="mx-auto w-36 "><img src="./assets/images/face-down.png"></div>
-                    <p
-                    class="text-center mt-4 " id="len">15 cartes restantes</p>
-                    <button id="fintour" class="flex items-center p-6 bg-yellow-600 text-white font-semibold py-3 mt-4 border-gray-500"  type="button" ">Fin du tour</button>
-                </aside>
-        </main>
-    </body>
-    </html>
+
+            <button id="fintour" type="button"
+                class="mt-4 w-full rounded-lg bg-yellow-300 px-4 py-3 font-bold text-gray-900 hover:bg-yellow-200">
+                Fin du tour
+            </button>
+        </aside>
+    </main>
+</body>
+</html>

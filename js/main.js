@@ -1,35 +1,45 @@
-import {afficherCamps, affichercarte, checkturn}from "./ui.js";
-import "./cards.js";
-import { turn, choisirCampAdversaire,findutour } from "./turns.js";
+import { afficherCamps, afficherEtatCombat, checkturn } from "./ui.js";
+import { turn, choisirCampAdversaire, findutour } from "./turns.js";
 import { gameState } from "./state.js";
+import "./cards.js";
+
 turn();
-checkturn();
-const buttonLumiere = document.getElementById("choose-light");
-buttonLumiere.addEventListener("click",function()
-{
-    if(gameState.currentTurn === "player" && gameState.player.camp === null && gameState.opponent.camp === null)
-    {
-        gameState.player.camp = "lumiere";
-        gameState.opponent.camp = "tenebres";
-        afficherCamps();
-        let camp = document.getElementById("camp-choice");
-        camp.classList.add("hidden");
-    }
-})
-const buttontenebre = document.getElementById("choose-dark");
-buttontenebre.addEventListener("click",function(){
-    if(gameState.currentTurn === "player" && gameState.player.camp === null && gameState.opponent.camp === null)
-    {
-        gameState.player.camp = "tenebres";
-        gameState.opponent.camp = "lumiere";
-        afficherCamps();
-        let camp = document.getElementById("camp-choice");
-        camp.classList.add("hidden");
-    }
-})
 choisirCampAdversaire();
-if(gameState.currentTurn === "opponent"){
+checkturn();
+
+if (gameState.currentTurn === "opponent")
+{
     afficherCamps();
 }
-const endturnbutton = document.getElementById("fintour");
-endturnbutton.addEventListener("click",findutour);
+
+afficherEtatCombat();
+
+function choisirCampJoueur(campJoueur, campAdversaire)
+{
+    if (gameState.currentTurn !== "player" || gameState.player.camp !== null)
+    {
+        return;
+    }
+
+    gameState.player.camp = campJoueur;
+    gameState.opponent.camp = campAdversaire;
+
+    afficherCamps();
+    checkturn();
+    afficherEtatCombat();
+}
+
+const boutonLumiere = document.getElementById("choose-light");
+boutonLumiere.addEventListener("click", function ()
+{
+    choisirCampJoueur("lumiere", "tenebres");
+});
+
+const boutonTenebres = document.getElementById("choose-dark");
+boutonTenebres.addEventListener("click", function ()
+{
+    choisirCampJoueur("tenebres", "lumiere");
+});
+
+const boutonFinTour = document.getElementById("fintour");
+boutonFinTour.addEventListener("click", findutour);
