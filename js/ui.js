@@ -80,3 +80,19 @@ export function afficherterrain()
         }
     }
 }
+export function afficherterrainadversaire()
+{
+    const battlefieldop =document.getElementById("opponent-battlefield");
+    const slots = battlefieldop.children;
+    for(let i = 0;i < slots.length;i++)
+    {
+        slots[i].textContent="";
+        if (gameState.opponent.battlefield[i])
+        {   
+            const img = document.createElement("img");
+            img.setAttribute("src",gameState.opponent.battlefield[i].image);
+             img.setAttribute("alt",gameState.opponent.battlefield[i].nom);
+            slots[i].append(img);
+        }
+    }
+}

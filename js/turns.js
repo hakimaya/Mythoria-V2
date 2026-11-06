@@ -1,6 +1,6 @@
 import { gameState } from "./state.js";
-import { jouertouradvesaire } from "./opponent.js";
-
+import { jouertouradvesaire} from "./opponent.js";
+import { afficherterrainadversaire} from "./ui.js";
 export function turn()
 {
     let number = Math.random();
@@ -37,5 +37,6 @@ export function findutour()
         gameState.currentTurn = "opponent";
         jouertouradvesaire();
         gameState.currentTurn = "player";
+        afficherterrainadversaire();
     }
 }
