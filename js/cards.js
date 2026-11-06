@@ -40,6 +40,15 @@ fetch("./data/cards.json")
                 creatures.push(cartes[i]);
             }
         }
+        gameState.opponent.deck = shuffleDeck(creatures);
+        for(let i = 0;i<5;i++)
+        {
+            if(gameState.opponent.deck.length > 0 && gameState.opponent.hand.length < 5)
+            {
+                let drawn = gameState.opponent.deck.pop();
+                gameState.opponent.hand.push(drawn);
+            }
+        }
     })
     .catch(function(erreur)
     {

@@ -31,5 +31,5 @@ choisirCampAdversaire();
 if(gameState.currentTurn === "opponent"){
     afficherCamps();
 }
-const endturnbutton = document.getElementById("finturn");
+const endturnbutton = document.getElementById("fintour");
 endturnbutton.addEventListener("click",findutour);
