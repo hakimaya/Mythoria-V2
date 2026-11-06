@@ -1,4 +1,5 @@
 import {afficherCamps, affichercarte, checkturn}from "./ui.js";
+import "./cards.js";
 import { turn, choisirCampAdversaire } from "./turns.js";
 import { gameState } from "./state.js";
 turn();
@@ -27,6 +28,6 @@ buttontenebre.addEventListener("click",function(){
     }
 })
 choisirCampAdversaire();
-if(currentTurn === "opponent"){
+if(gameState.currentTurn === "opponent"){
     afficherCamps();
 }

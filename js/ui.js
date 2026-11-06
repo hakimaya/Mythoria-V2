@@ -1,4 +1,5 @@
-import { gameState } from "./state";
+import { invoauercarte } from "./combat.js";
+import { gameState } from "./state.js";
 const mainplayer = document.querySelector("#player-hand");
 
 
@@ -20,6 +21,10 @@ export function affichercarte(carte){
     spanhp.textContent = " · HP :" + carte.vie;
     bouton.append(spanhp);
     mainplayer.append(bouton);
+
+    bouton.addEventListener("click", function(){
+        invoauercarte(carte);
+    })
 }
 export function carterestante()
 {
@@ -44,7 +49,7 @@ export function afficherCamps()
     const titreop = document.getElementById("Adversaire");
     const titrepl = document.getElementById("player");
     
-    titrepl.textContent = "Vous — lumiere";
-    titreop.textContent = "Adversaire - tenebres";
+    titrepl.textContent = "Vous — " + gameState.player.camp;
+    titreop.textContent = "Adversaire - " + gameState.opponent.camp;
     
 }
