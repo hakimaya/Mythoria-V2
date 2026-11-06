@@ -1,5 +1,6 @@
-import { invoauercarte } from "./combat.js";
+import { invoauercarte,attaquer } from "./combat.js";
 import { gameState } from "./state.js";
+let attaquantSelectionne = null;
 const mainplayer = document.querySelector("#player-hand");
 
 
@@ -66,33 +67,70 @@ export function affichermain()
 
 export function afficherterrain()
 {
-    const battlefield =document.getElementById("player-battlefield");
+    const battlefield = document.getElementById("player-battlefield");
     const slots = battlefield.children;
-    for(let i = 0;i < slots.length;i++)
+
+    for (let i = 0; i < slots.length; i++)
     {
-        slots[i].textContent="";
-        if (gameState.player.battlefield[i])
-        {   
+        slots[i].textContent = "";
+        const carte = gameState.player.battlefield[i];
+
+        if (carte)
+        {
             const img = document.createElement("img");
-            img.setAttribute("src",gameState.player.battlefield[i].image);
-             img.setAttribute("alt",gameState.player.battlefield[i].nom);
+            img.src = carte.image;
+            img.alt = carte.nom;
             slots[i].append(img);
+
+            img.addEventListener("click", function ()
+            {
+                if (gameState.currentTurn !== "player" || gameState.gameOver)
+                {
+                    return;
+                }
+
+                attaquantSelectionne = carte;
+
+                if (gameState.opponent.battlefield.length === 0)
+                {
+                    attaquer(carte);
+                    document.getElementById("opponent-hp").textContent =
+                        "HP : " + gameState.opponent.hp;
+                    attaquantSelectionne = null;
+                }
+            });
         }
     }
 }
+
 export function afficherterrainadversaire()
 {
-    const battlefieldop =document.getElementById("opponent-battlefield");
-    const slots = battlefieldop.children;
-    for(let i = 0;i < slots.length;i++)
+    const battlefield = document.getElementById("opponent-battlefield");
+    const slots = battlefield.children;
+
+    for (let i = 0; i < slots.length; i++)
     {
-        slots[i].textContent="";
-        if (gameState.opponent.battlefield[i])
-        {   
+        slots[i].textContent = "";
+        const cible = gameState.opponent.battlefield[i];
+
+        if (cible)
+        {
             const img = document.createElement("img");
-            img.setAttribute("src",gameState.opponent.battlefield[i].image);
-             img.setAttribute("alt",gameState.opponent.battlefield[i].nom);
+            img.src = cible.image;
+            img.alt = cible.nom;
             slots[i].append(img);
+
+            img.addEventListener("click", function ()
+            {
+                if (attaquantSelectionne === null)
+                {
+                    return;
+                }
+
+                attaquer(attaquantSelectionne, cible);
+                attaquantSelectionne = null;
+                afficherterrainadversaire();
+            });
         }
     }
 }

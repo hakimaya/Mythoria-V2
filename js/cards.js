@@ -1,58 +1,83 @@
-import { affichercarte , carterestante,checkturn} from "./ui.js";
-import {deckid,gameState} from "./state.js";
+import {
+    affichermain,
+    carterestante,
+    afficherterrainadversaire
+} from "./ui.js";
+import { deckid, gameState } from "./state.js";
 import { shuffleDeck } from "./utils.js";
+import { jouertouradvesaire } from "./opponent.js";
 
 fetch("./data/cards.json")
-    .then(function(response)
+    .then(function (response)
     {
-        if(!response.ok){
-            throw new Error("impossible");
-        }
-    
-    return response.json();
-})
-    .then(function(cartes)
-    {
-        const deck = deckid.map(function(id){
-            return cartes.find(function(carte){
-                return carte.id === id;
-            })
-        })
-        gameState.player.deck = shuffleDeck(deck);
-        for(let i = 0;i<5;i++)
+        if (!response.ok)
         {
-            if(gameState.player.deck.length > 0 && gameState.player.hand.length < 5)
+            throw new Error("Impossible de charger les cartes.");
+        }
+
+        return response.json();
+    })
+    .then(function (cartes)
+    {
+        const deckJoueur = [];
+        const ids = deckid || [];
+
+        for (let i = 0; i < ids.length; i++)
+        {
+            const carte = cartes.find(function (carte)
             {
-                let drawn = gameState.player.deck.pop();
-                gameState.player.hand.push(drawn);
+                return carte.id === ids[i];
+            });
+
+            if (carte)
+            {
+                deckJoueur.push({ ...carte });
             }
         }
-        for(let i = 0 ; i < gameState.player.hand.length ; i++)
+
+        gameState.player.deck = shuffleDeck(deckJoueur);
+
+        for (let i = 0; i < 5; i++)
         {
-            affichercarte(gameState.player.hand[i]);
-        }
-        carterestante();
-        let creatures = [];
-        for(let i = 0; i < cartes.length;i++)
-        {
-            if(cartes[i].type !== "sort")
+            if (gameState.player.deck.length > 0 && gameState.player.hand.length < 5)
             {
-                creatures.push(cartes[i]);
+                const carte = gameState.player.deck.pop();
+                gameState.player.hand.push(carte);
             }
         }
+
+        const creatures = [];
+
+        for (let i = 0; i < cartes.length; i++)
+        {
+            if (cartes[i].type !== "sort")
+            {
+                creatures.push({ ...cartes[i] });
+            }
+        }
+
         gameState.opponent.deck = shuffleDeck(creatures);
-        for(let i = 0;i<5;i++)
+
+        for (let i = 0; i < 5; i++)
         {
-            if(gameState.opponent.deck.length > 0 && gameState.opponent.hand.length < 5)
+            if (gameState.opponent.deck.length > 0 && gameState.opponent.hand.length < 5)
             {
-                let drawn = gameState.opponent.deck.pop();
-                gameState.opponent.hand.push(drawn);
+                const carte = gameState.opponent.deck.pop();
+                gameState.opponent.hand.push(carte);
             }
+        }
+
+        affichermain();
+        carterestante();
+
+        if (gameState.currentTurn === "opponent")
+        {
+            jouertouradvesaire();
+            gameState.currentTurn = "player";
+            afficherterrainadversaire();
         }
     })
-    .catch(function(erreur)
+    .catch(function (erreur)
     {
         console.error(erreur);
-    })
-;
-
+    });
