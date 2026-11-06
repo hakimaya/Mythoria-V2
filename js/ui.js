@@ -24,6 +24,8 @@ export function affichercarte(carte){
 
     bouton.addEventListener("click", function(){
         invoauercarte(carte);
+        affichermain();
+        afficherterrain();
     })
 }
 export function carterestante()
@@ -52,4 +54,26 @@ export function afficherCamps()
     titrepl.textContent = "Vous — " + gameState.player.camp;
     titreop.textContent = "Adversaire - " + gameState.opponent.camp;
     
+}
+export function affichermain()
+{
+    mainplayer.textContent = "";
+    for(let i = 0;i<gameState.player.hand.length;i++)
+    {
+        affichercarte(gameState.player.hand[i]);
+    }
+}
+
+export function afficherterrain()
+{
+    const battlefield =document.getElementById("player-battlefield");
+    const slots = battlefield.children;
+    for(let i = 0;i < slots.length;i++)
+    {
+        slots[i].textContent="";
+        if(gameState.player.gameState.battlefield[i])
+        {
+            slots[i].textContent = gameState.player.battlefield[i].nom;
+        }
+    }
 }
